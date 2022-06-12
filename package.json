@@ -1,5 +1,5 @@
 {
-  "name": "dekey-web-embedded-wallet-provider",
+  "name": "@skilm/web-embedded-wallet-provider",
   "version": "0.0.1",
   "main": "dist/index.js",
   "engines": {

@@ -1,4 +1,4 @@
-# @metamask/mobile-provider
+# @skilm/web-embedded-wallet-provider
 
 This package generates the JavaScript code that's injected on every web page when using MetaMask Mobile.
 
