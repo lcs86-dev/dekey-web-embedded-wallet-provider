@@ -1,4 +1,4 @@
-function init() {
+function init(src) {
   return new Promise((resolve, reject) => {
     let hasKeyShare;
 
@@ -32,30 +32,24 @@ function init() {
         once: true,
       }
     );
+
+    injectIframe(src);
   });
 }
 
-window.addEventListener(
-  "load",
-  () => {
-    const iframe = document.createElement("iframe");
-    iframe.classList.add("dekey-iframe");
-    iframe.src = "https://tourmaline-muffin-a06469.netlify.app";
-    iframe.style = {
-      height: 0,
-      width: 0,
-      border: "none",
-      visibility: "hidden",
-    };
-    document.body.appendChild(iframe);
-    // a.dataset.fortmaticIframeLabel = new URL(opts.endpoint).host;
-    // a.src = new URL(
-    //   "/send?params=" + opts.encodedQueryParams,
-    //   opts.endpoint
-    // ).href;
-  },
-  false
-);
+function injectIframe(src) {
+  const iframe = document.createElement("iframe");
+  iframe.classList.add("dekey-iframe");
+  // iframe.src = "https://tourmaline-muffin-a06469.netlify.app";
+  iframe.src = src;
+  iframe.style = {
+    height: 0,
+    width: 0,
+    border: "none",
+    visibility: "hidden",
+  };
+  document.body.appendChild(iframe);
+}
 
 function initializeProvider() {
   if (shouldInject()) {
