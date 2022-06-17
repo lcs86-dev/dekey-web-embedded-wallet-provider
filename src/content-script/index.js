@@ -47,6 +47,7 @@ function injectIframe(src) {
     width: 0,
     border: "none",
     visibility: "hidden",
+    display: "none",
   };
   document.body.appendChild(iframe);
 }
