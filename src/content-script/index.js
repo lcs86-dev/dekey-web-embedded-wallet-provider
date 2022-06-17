@@ -40,15 +40,14 @@ function init(src) {
 function injectIframe(src) {
   const iframe = document.createElement("iframe");
   iframe.classList.add("dekey-iframe");
-  // iframe.src = "https://tourmaline-muffin-a06469.netlify.app";
   iframe.src = src;
-  iframe.style = {
-    height: 0,
-    width: 0,
-    border: "none",
-    visibility: "hidden",
-    display: "none",
-  };
+
+  iframe.style.height = 0;
+  iframe.style.width = 0;
+  iframe.style.border = "none";
+  iframe.style.visibility = "hidden";
+  iframe.style.display = "none";
+
   document.body.appendChild(iframe);
 }
 
