@@ -1,14 +1,12 @@
 const { initializeProvider, shimWeb3 } = require("@metamask/inpage-provider");
 const ObjectMultiplex = require("@metamask/object-multiplex");
 const pump = require("pump");
-const MobilePortStream = require("./MobilePortStream");
+const BackgroundPortStream = require("./BackgroundPortStream");
 const ReactNativePostMessageStream = require("./ReactNativePostMessageStream");
 
 const INPAGE = "dekey-mobile-inpage";
 const CONTENT_SCRIPT = "dekey-mobile-contentscript";
 const PROVIDER = "dekey-mobile-provider";
-
-// jsonRpcStreamName = 'metamask-provider'
 
 // Setup stream for content script communication
 const metamaskStream = new ReactNativePostMessageStream({
@@ -24,10 +22,10 @@ initializeProvider({
 });
 
 // Set content script post-setup function
-Object.defineProperty(window, "_metamaskSetupProvider", {
+Object.defineProperty(window, "_dekeySetupProvider", {
   value: () => {
     setupProviderStreams();
-    delete window._metamaskSetupProvider;
+    delete window._dekeySetupProvider;
   },
   configurable: true,
   enumerable: false,
@@ -47,7 +45,7 @@ function setupProviderStreams() {
     target: INPAGE,
   });
 
-  const appStream = new MobilePortStream({
+  const appStream = new BackgroundPortStream({
     name: CONTENT_SCRIPT,
   });
 
@@ -98,13 +96,11 @@ function forwardTrafficBetweenMuxes(channelName, muxA, muxB) {
  * @param {Error} err - Stream connection error
  */
 function logStreamDisconnectWarning(remoteLabel, err) {
-  // let warningMsg = `DekeyContentscript - lost connection to ${remoteLabel}`;
-  // if (err) {
-  //   warningMsg += `\n${err.stack}`;
-  // }
-  // console.warn(warningMsg);
-  // console.warn(err);
-  // console.error(err);
+  let warningMsg = `DekeyContentscript - lost connection to ${remoteLabel}`;
+  if (err) {
+    warningMsg += `\n${err.stack}`;
+  }
+  console.warn(warningMsg);
 }
 
 /**
@@ -121,7 +117,7 @@ function notifyProviderOfStreamFailure() {
         name: PROVIDER, // the object-multiplex channel name
         data: {
           jsonrpc: "2.0",
-          method: "METAMASK_STREAM_FAILURE",
+          method: "DEKEY_STREAM_FAILURE",
         },
       },
     },

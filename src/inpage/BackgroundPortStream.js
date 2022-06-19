@@ -38,10 +38,12 @@ MobilePortStream.prototype._onMessage = function (event) {
   try {
     msg = JSON.parse(event.data);
   } catch (error) {}
+
   // validate message
   // if (this._origin !== "*" && event.origin !== this._origin) {
   //   return;
   // }
+
   if (!msg || typeof msg !== "object") {
     return;
   }
@@ -51,6 +53,7 @@ MobilePortStream.prototype._onMessage = function (event) {
   if (msg.target && msg.target !== this._name) {
     return;
   }
+
   // Filter outgoing messages
   // if (msg.data.data && msg.data.data.toNative) {
   //   return;
@@ -91,18 +94,8 @@ MobilePortStream.prototype._read = noop;
  */
 MobilePortStream.prototype._write = function (msg, _encoding, cb) {
   // eslint-disable-next-line no-alert
-  // console.warn("MobilePortStream.prototype._write");
-  // console.warn(msg);
   try {
     const iframe = document.querySelector("iframe");
-    // iframe.contentWindow.postMessage(
-    //   JSON.stringify({
-    //     name: "name test",
-    //     data: "data test",
-    //     origin: window.location.href,
-    //   }),
-    //   "*"
-    // );
     if (Buffer.isBuffer(msg)) {
       const data = msg.toJSON();
       data._isBuffer = true;
@@ -119,7 +112,6 @@ MobilePortStream.prototype._write = function (msg, _encoding, cb) {
         "*"
       );
     }
-    // console.log("after window.postMessage");
   } catch (err) {
     // console.warn(err);
     return cb(new Error("MobilePortStream - disconnected"));

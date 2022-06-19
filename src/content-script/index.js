@@ -3,16 +3,11 @@ function init(src) {
     let hasKeyShare;
 
     window.addEventListener("message", (e) => {
-      // console.log("window message", e);
-
       // web wallet is initialized
-      // if (e.data && e.data.type === "bridge#initialized" && !allInitialized) {
       if (e.data && e.data.type === "bridge#initialized") {
         hasKeyShare = e.data.hasKeyShare;
 
         initializeProvider();
-
-        // allInitialized = true;
       }
     });
 
@@ -21,8 +16,6 @@ function init(src) {
       (event) => {
         const { ethereum } = window;
         if (ethereum) {
-          // const web3 = new Web3(ethereum);
-
           resolve({ ethereum, hasKeyShare, locked: true });
         } else {
           reject();
@@ -65,7 +58,7 @@ function initializeProvider() {
    */
   async function start() {
     await domIsReady();
-    window._metamaskSetupProvider();
+    window._dekeySetupProvider();
   }
 
   /**
