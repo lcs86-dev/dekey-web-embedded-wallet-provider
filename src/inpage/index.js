@@ -118,7 +118,7 @@ function notifyProviderOfStreamFailure() {
         name: PROVIDER, // the object-multiplex channel name
         data: {
           jsonrpc: "2.0",
-          method: "DEKEY_STREAM_FAILURE",
+          method: "METAMASK_STREAM_FAILURE",
         },
       },
     },
