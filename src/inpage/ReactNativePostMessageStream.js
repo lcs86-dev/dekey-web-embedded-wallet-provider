@@ -73,6 +73,7 @@ PostMessageStream.prototype._read = noop;
 PostMessageStream.prototype._write = function (data, _encoding, cb) {
   const message = {
     target: this._target,
+    name: "dekey-mobile-provider",
     data,
   };
   this._targetWindow.postMessage(message, this._origin);
