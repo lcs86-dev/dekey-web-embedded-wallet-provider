@@ -91,8 +91,8 @@ MobilePortStream.prototype._read = noop;
  */
 MobilePortStream.prototype._write = function (msg, _encoding, cb) {
   // eslint-disable-next-line no-alert
-  console.warn("MobilePortStream.prototype._write");
-  console.warn(msg);
+  // console.warn("MobilePortStream.prototype._write");
+  // console.warn(msg);
   try {
     const iframe = document.querySelector("iframe");
     // iframe.contentWindow.postMessage(
@@ -119,9 +119,9 @@ MobilePortStream.prototype._write = function (msg, _encoding, cb) {
         "*"
       );
     }
-    console.log("after window.postMessage");
+    // console.log("after window.postMessage");
   } catch (err) {
-    console.warn(err);
+    // console.warn(err);
     return cb(new Error("MobilePortStream - disconnected"));
   }
   return cb();

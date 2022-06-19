@@ -41,7 +41,6 @@ Object.defineProperty(window, "_metamaskSetupProvider", {
  */
 function setupProviderStreams() {
   // eslint-disable-next-line no-alert
-  console.log("mobile-provider setupProviderStreams");
   // the transport-specific streams for communication between inpage and background
   const pageStream = new ReactNativePostMessageStream({
     name: CONTENT_SCRIPT,
