@@ -26,7 +26,7 @@ function init(src) {
       }
     );
 
-    // injectIframe(src);
+    injectIframe(src);
   });
 }
 
